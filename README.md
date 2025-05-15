@@ -1,16 +1,20 @@
-# imc_mastigadores
+# Calculadora de IMC
 
-A new Flutter project.
+## Descrição do Aplicativo
 
-## Getting Started
+Este aplicativo tem como objetivo calcular o Índice de Massa Corporal (IMC) com base no peso e altura informados pelo usuário. Após o cálculo, o app exibe a classificação do IMC (como "Peso ideal", "Obesidade", etc.), uma mensagem orientativa e uma cor correspondente ao resultado.
 
-This project is a starting point for a Flutter application.
+### Objetivo:
+Auxiliar os usuários a monitorarem sua saúde corporal de maneira prática e rápida.
 
-A few resources to get you started if this is your first Flutter project:
+## Matrícula dos componentes da dupla
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Aluno 1: Guilherme Kunsch - 123100002
+- Aluno 2: João Victor Sarmento - 123100062
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+![Tela Inicial](./image/imagem4.jpeg)
+![Resultado Peso Ideal](./image/imagem1.jpeg)
+![Resultado Abaixo do Peso](./image/imagem3.jpeg.jpeg)
+![Resultado Obesidade](./image/imagem2.jpeg.jpeg)
+![Resultado Sobrepeso](./image/imagem5.jpeg.jpeg)

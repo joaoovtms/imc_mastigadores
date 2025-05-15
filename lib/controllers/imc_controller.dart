@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ImcController {
-  double peso = 0;
-  double altura = 0;
+  double peso;
+  double altura;
 
   ImcController({required this.peso, required this.altura});
 
@@ -29,11 +29,11 @@ class ImcController {
     return "Atenção! Cuide da sua saúde com urgência.";
   }
 
-  getCor(double imc) {
-    if (imc < 18.5) return const Color(0xFFFFFF00); // amarelo
-    if (imc < 24.9) return const Color(0xFF00FF00); // verde
-    if (imc < 29.9) return const Color(0xFFFFA500); // laranja
-    if (imc < 39.9) return const Color(0xFFFF0000); // vermelho
-    return const Color(0xFF8B0000); // vermelho escuro
+  Color getCor(double imc) {
+    if (imc < 18.5) return Colors.yellow.shade700;
+    if (imc < 24.9) return Colors.green.shade600;
+    if (imc < 29.9) return Colors.orange.shade600;
+    if (imc < 39.9) return Colors.red.shade700;
+    return Colors.red.shade900;
   }
 }

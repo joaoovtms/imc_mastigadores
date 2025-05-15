@@ -1,68 +1,62 @@
 import 'package:flutter/material.dart';
 import 'controllers/imc_controller.dart';
-import 'result_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ResultPage extends StatelessWidget {
+  final double imc;
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final pesoController = TextEditingController();
-  final alturaController = TextEditingController();
-
-  void calcularIMC() {
-    final peso = double.tryParse(pesoController.text);
-    final altura = double.tryParse(alturaController.text);
-
-    if (peso != null && altura != null && altura > 0) {
-      final imcController = ImcController(peso: peso, altura: altura);
-      final imc = imcController.calcular();
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => ResultPage(imc: imc)),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Por favor, preencha os campos corretamente'),
-        ),
-      );
-    }
-  }
+  const ResultPage({super.key, required this.imc});
 
   @override
   Widget build(BuildContext context) {
+    final controller = ImcController(peso: 1, altura: 1);
+    final classificacao = controller.getClassificacao(imc);
+    final cor = controller.getCor(imc);
+    final mensagem = controller.getMensagem(imc);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Calculadora de IMC')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const Icon(
-              Icons.monitor_weight,
-              size: 100,
-              color: Colors.blueAccent,
+      appBar: AppBar(title: const Text('Resultado')),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: cor, width: 4),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: const [
+                BoxShadow(color: Colors.black12, blurRadius: 8),
+              ],
             ),
-            TextField(
-              controller: pesoController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Peso (kg)'),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.favorite, size: 80, color: cor),
+                const SizedBox(height: 16),
+                Text(
+                  'Seu IMC é:',
+                  style: TextStyle(fontSize: 24, color: Color(0xFF00123C)),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  imc.toStringAsFixed(2),
+                  style: TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                    color: cor,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(classificacao, style: TextStyle(fontSize: 22, color: cor)),
+                const SizedBox(height: 12),
+                Text(
+                  mensagem,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16, color: Colors.black87),
+                ),
+              ],
             ),
-            TextField(
-              controller: alturaController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Altura (m)'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: calcularIMC,
-              child: const Text('Calcular IMC'),
-            ),
-          ],
+          ),
         ),
       ),
     );
